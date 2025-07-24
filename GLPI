@@ -1,0 +1,36 @@
+🔧 Zona horaria en GLPI desde la interfaz web
+Esto te permitirá alinear la hora mostrada en GLPI con la zona horaria correcta (aunque no cambia la hora del servidor).
+
+Ingresa a GLPI como superadministrador.
+
+Ve a:
+Configuración > Preferencias generales > Pestaña "General"
+
+Busca la opción Zona horaria.
+
+Selecciona la zona correspondiente, por ejemplo:
+America/Bogota para Colombia.
+
+Guarda los cambios.
+
+Esto afectará la visualización de horas en el frontend de GLPI, pero no la hora del servidor ni de los logs de sistema.
+
+📁 ¿Puedo cambiar la zona horaria desde archivos si no tengo SSH?
+Si tienes acceso a los archivos mediante FTP o panel web (como cPanel, Plesk, o File Manager en hosting compartido), puedes intentar forzar la zona horaria PHP de GLPI editando el archivo config/config_db.php o agregando una instrucción a index.php.
+
+Opción 1: Editar config_db.php
+Agrega esta línea al final:
+
+php
+Copiar
+Editar
+date_default_timezone_set('America/Bogota');
+Opción 2: Editar index.php de GLPI
+Al principio del archivo (index.php en la raíz de GLPI), agrega:
+
+php
+Copiar
+Editar
+ini_set('date.timezone', 'America/Bogota');
+date_default_timezone_set('America/Bogota');
+⚠️ Advertencia: Este método no cambia la hora real del sistema, solo afecta cómo PHP interpreta y muestra la hora. Los logs del servidor seguirán usando la hora del sistema.
